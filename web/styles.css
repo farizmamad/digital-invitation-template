@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantora+One&family=Courgette&family=Eczar:wght@600&family=Great+Vibes&family=Niconne&family=Salsa&family=Satisfy&family=Tillana:wght@600&display=swap');
+
+.margin-top-1 {
+    margin-top: 1%;
+}
+
+.margin-top-2 {
+    margin-top: 2%;
+}
+
+.margin-top-5 {
+    margin-top: 5%;
+}
+
+.margin-bottom-1 {
+    margin-bottom: 1%;
+}
+
+.margin-bottom-3 {
+    margin-bottom: 3%;
+}
+
+.rounded-box {
+    border-radius:15px; 
+    box-shadow: 2px 2px 4px #2e2e2e;
+}
+
+.color-primary {
+    color: #03597b;
+}
+
+.color-secondary {
+    color: #d1f1f5;
+}
+
+.bg-color-primary {
+    background-color: #03597b;
+}
+
+.bg-color-secondary {
+    background-color: #d1f1f5;
+}
+
+.typography {
+    font-family: "Niconne", cursive;
+}
+
+.typography-2 {
+    font-family: "Courgette", cursive;
+}
+
+.typography-3 {
+    font-family: "Eczar", cursive;
+}
+
+.typography-4 {
+    font-family: "Cantora One", cursive;
+}
+
+.typography-5 {
+    font-family: "Satisfy", cursive;
+}
+
+.typography-6{
+    font-family:"Salsa",cursive
+}
+
+.typography-7{
+    font-family:"Tillana",cursive
+}
+
+.shadow-black {
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.shadow-gray {
+    text-shadow: 2px 2px 4px #2e2e2e;
+}
+
+.center-cropped {
+    max-height: 100%;
+    max-width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.center-cropped img {
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+}
+
+.fade-in-text-fast {
+    animation-name: fadeInNear;
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+    visibility: hidden;
+}
+
+.fade-in-text-medium {
+    animation-name: fadeInNormal;
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+    animation-delay: 0.8s;
+    visibility: hidden;
+}
+
+.fade-in-text-slow {
+    animation-name: fadeInFar;
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+    animation-delay: 2s;
+    visibility: hidden;
+}
+
+.btn-floating {
+    position:fixed;
+    right:25px;
+    bottom: 25px;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    border:0;
+    z-index: 9999;
+    color: white;
+    background-color: #03597b;
+    transition: .2s;
+}
+
+/* .btn-floating:hover {
+    cursor: pointer;
+} */
+
+@keyframes fadeInNear {
+    0% {opacity:0; transform: translateY(300%);}
+    100% {opacity:1; transform: translateY(0%); visibility: visible;}
+}
+
+@keyframes fadeInNormal {
+    0% {opacity:0; transform: translateY(150%);}
+    100% {opacity:1; transform: translateY(0%); visibility: visible; }
+}
+
+@keyframes fadeInFar {
+    0% {opacity:0; transform: translateY(100%);}
+    100% {opacity:1; transform: translateY(0%); visibility: visible; }
+}
+
+.reveal{
+    position: relative;
+    transform: translateY(30px);
+    opacity: 0.8;
+    transition: 2s all ease;
+}
+.reveal.active{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .img-person {
+        height: auto;
+        width: 120px;
+    }
+    
+    .img-fluid-custom {
+        max-width: 100%;
+        height: auto;
+        padding: 4% 0
+    }
+
+    .text-large {
+        font-size: 400%;
+    }
+
+    .text-medium-large {
+        font-size: 150%;
+    }
+    
+    .text-medium {
+        font-size: 90%
+    }
+    
+    .text-small {
+        font-size: 50%
+    }
+
+    div.align-items-start {
+        margin-top: 15%;
+    }
+
+    .envelope {
+        background-image: url("../images/mobile/1.jpg");
+        background-position: center center;
+        background-size:auto 100%;
+        background-repeat: no-repeat;
+    }
+
+    .cover {
+        background-image: url("../images/mobile/gallery-1.jpg");
+        background-position: center center;
+        background-size:auto 100%;
+        background-repeat: no-repeat;
+    }
+    
+    .preamble {
+        background-image: url("../images/mobile/2.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    } 
+    
+    .bride-groom {
+        background-image: url("../images/mobile/3.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .event,
+    .event-virtual {
+        background-image: url("../images/mobile/4.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .countdown-page,
+    .live-streaming,
+    .gallery {
+        background-image: url("../images/mobile/6.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .location,
+    .caution,
+    .rsvp {
+        background-image: url("../images/mobile/5.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .gift  {
+        background-image: url("../images/mobile/12.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .invitation  {
+        background-image: url("../images/mobile/11.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .footer {
+        background-image: url("../images/mobile/8.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+}
+@media (min-width: 769px) {
+    img.img-person {
+        height: auto;
+        width: 250px;
+    }
+    
+    .img-fluid-custom-right {
+        max-width: 100%;
+        height: auto;
+        padding: 2% 5% 2% 0;
+    }
+    
+    .img-fluid-custom-left {
+        max-width: 100%;
+        height: auto;
+        padding: 2% 0 2% 5%;
+    }
+    
+    .text-large {
+        font-size: 600%;
+    }
+
+    .text-medium-large {
+        font-size: 220%;
+    }
+    
+    .text-medium {
+        font-size: 120%
+    }
+    
+    .text-small {
+        font-size: 50%
+    }
+
+    div.align-items-start {
+        margin-top: 2%;
+    }
+
+    .envelope {
+        background-image: url("../images/desktop/1.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+
+    .cover {
+        background-image: url("../images/desktop/gallery-1.jpg");
+        background-position: center center;
+        background-size:auto 100%;
+        background-repeat: no-repeat;
+    }
+    
+    .preamble {
+        background-image: url("../images/desktop/2.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    } 
+    
+    .bride-groom {
+        background-image: url("../images/desktop/3.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .event,
+    .event-virtual {
+        background-image: url("../images/desktop/4.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .countdown-page,
+    .live-streaming,
+    .gallery  {
+        background-image: url("../images/desktop/6.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .location,
+    .caution,
+    .rsvp  {
+        background-image: url("../images/desktop/5.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .invitation,
+    .gift  {
+        background-image: url("../images/desktop/11.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+    
+    .footer {
+        background-image: url("../images/desktop/8.jpg");
+        background-position: center center;
+        background-size:100% 100%;
+    }
+}
+
+.countdown {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.day,
+.hour,
+.minute,
+.second {
+    font-size: 2rem;
+}
+
+.waiting {
+    height: 50vh;
+}
+
+#congratulationsList {
+    overflow:scroll;
+    max-height: 50%;
+    -webkit-overflow-scrolling: touch;
+}
+
+section envelope div div div div {
+    margin-bottom: 1%;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 60%; /* Full width */
+    height: 60%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #resepsiSesi1,
+  #resepsiSesi2 {
+      display: none
+  }

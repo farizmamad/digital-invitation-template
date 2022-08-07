@@ -1,0 +1,64 @@
+version: '3.3'
+services:
+  mongodb:
+    image : mongo:latest
+    container_name: mongodb
+    command: [--auth]
+    volumes:
+      - ./database:/data/db
+    ports:
+      - 49003:27017
+    networks:
+      - nesjs-network
+    restart: always
+  dev:
+    container_name: nestjs_api_dev
+    image: nestjs-api_dev:1.0.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: npm run start:dev
+    ports:
+      - 49002:49000
+    environment:
+      - PORT=49000
+      - DB_HOST=mongodb:27017
+      - DB_NAME=digital-inv-dev
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - ALLOWED_ORIGIN=http://localhost:49000
+    networks:
+      - nesjs-network
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+  prod:
+    container_name: nestjs_api_prod
+    image: nestjs-api-prod:1.0.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile.prod
+    command: npm run start:prod
+    ports:
+      - 3000:49000
+    networks:
+      - nesjs-network
+    environment:
+      - PORT=49000
+      - DB_HOST=mongodb:27017
+      - DB_NAME=digital-inv
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - ALLOWED_ORIGIN=https://host-origin.com
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+networks:
+    nesjs-network:
+      driver: bridge
