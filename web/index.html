@@ -25,7 +25,7 @@
     <script type="text/jsx">
         const app = document.getElementById('app');
 
-        function EnvelopeSection() {
+        function EnvelopeSection({ bride, groom, marriageDate, recepient }) {
             return(
                 <section className="container-fluid envelope">
                     <div className="d-flex vh-100 align-items-center"> 
@@ -33,14 +33,14 @@
                             <div className="row justify-content-center">
                                 <div className="d-flex flex-column vh-50 justify-content-center margin-bottom-1">
                                     <p className="text-center text-medium-large typography-2 color-primary">Wedding Invitation</p>
-                                    <h1 className="text-center text-large typography color-primary">Marie & John</h1>
-                                    <p className="text-center text-medium-large typography-3 color-primary">Saturday, 5 Jan 2025</p>
+                                    <h1 className="text-center text-large typography color-primary">{`${bride ?? 'Marie'} & ${groom ?? 'John'}`}</h1>
+                                    <p className="text-center text-medium-large typography-3 color-primary">{`${marriageDate ?? 'Saturday, 5 Jan 2025'}`}</p>
                                 </div>
                             </div>
                             <div className="row justify-content-center">
                                 <div className="col-10 col-md-5 justify-content-center border rounded bg-color-secondary">
                                     <p className="text-center text-medium color-primary">Kepada Yth.</p>
-                                    <h4 className="text-center color-primary guest-name">Tamu Undangan</h4>
+                                    <h4 className="text-center color-primary guest-name">{recepient ?? 'Tamu Undangan'}</h4>
                                     <p className="text-center text-small color-primary">Mohon maaf apabila ada kesalahan penulisan nama dan/atau gelar</p>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
             );
         }
 
-        function CoverSection() {
+        function CoverSection({ bride, groom, marriageDate }) {
             return(
                 <section className="container-fluid cover">
                     <div className="d-flex vh-100">
@@ -63,8 +63,8 @@
                             <div className="row align-items-start">
                                 <div className="d-flex flex-column vh-50 justify-content-center margin-bottom-1">
                                     <p className="text-center text-medium-large typography-2 shadow-black text-light fade-in-text-fast">Wedding Invitation</p>
-                                    <h1 className="text-center text-large typography shadow-gray text-light fade-in-text-medium">Marie & John</h1>
-                                    <p className="text-center text-medium-large typography-3 shadow-black text-light fade-in-text-slow">Saturday, 5 Jan 2025</p>
+                                    <h1 className="text-center text-large typography shadow-gray text-light fade-in-text-medium">{`${bride ?? 'Marie'} & ${groom ?? 'John'}`}</h1>
+                                    <p className="text-center text-medium-large typography-3 shadow-black text-light fade-in-text-slow">{`${marriageDate ?? 'Saturday, 5 Jan 2025'}`}</p>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
             );
         }
 
-        function BrideGroomSection() {
+        function BrideGroomSection({ bride, brideDescription, brideFull, groom, groomDescription, groomFull }) {
             return (
                 <section className="container-fluid bride-groom">
                     <div className="d-flex vh-100 align-items-center justify-content-center">
@@ -120,8 +120,8 @@
                                     </div>  
                                 </div>
                                 <div className="col-8 col-md-4 text-center">
-                                    <h4 className="text-start typography text-medium-large text-dark">Marie,  (Marie)</h4>
-                                    <p className="text-start typography-4 text-medium color-primary">Putri dari<br /> David<br /> Julia</p>
+                                    <h4 className="text-start typography text-medium-large text-dark">{`${brideFull ?? 'Marie'},  (${bride ?? 'Marie'})`}</h4>
+                                    <p className="text-start typography-4 text-medium color-primary">{`${brideDescription ?? 'Putri dari David & Julia'}`}</p>
                                 </div>
                             </div>
                             <div className="row justify-content-center reveal">
@@ -131,8 +131,8 @@
                             </div>
                             <div className="row justify-content-center reveal">
                                 <div className="col-8 col-md-4 text-center">
-                                    <h4 className="text-end typography text-medium-large text-dark">John,  (John)</h4>
-                                    <p className="text-end typography-4 text-medium color-primary">Putra ke-2 dari <br /> Pablo<br /> Anne</p>
+                                    <h4 className="text-end typography text-medium-large text-dark">{`${groomFull ?? 'John'},  (${groom ?? 'John'})`}</h4>
+                                    <p className="text-end typography-4 text-medium color-primary">{`${groomDescription ?? 'Putra ke-2 dari Pablo & Anne'}`}</p>
                                 </div>
                                 <div className="col-4 col-md-2 text-center">
                                     <div className="row justify-content-end">
@@ -154,7 +154,7 @@
             );
         }
 
-        function EventSection() {
+        function EventSection({ marriageDate, venue, venueAddress }) {
             return (
                 <section className="container-fluid event">
                     <div className="d-flex vh-100 align-items-center justify-content-center">
@@ -171,14 +171,14 @@
                                     </div>
                                     <div className="row justify-content-center reveal">
                                         <div className="col-12 col-md-12">
-                                            <h4 className="text-center typography-2 text-medium-large color-primary">Sabtu, 5 Jan 2025</h4>
+                                            <h4 className="text-center typography-2 text-medium-large color-primary">{`${marriageDate ?? 'Sabtu, 5 Jan 2025'}`}</h4>
                                         </div>
                                     </div>
                                     <div className="row justify-content-center reveal">
                                         <div className="col-12 col-md-12">
                                             <p className="text-center typography-6 text-dark">
-                                                di Hotel & Convention<br />
-                                                Jl. Hotel, Jakarta 12420<br />
+                                                di {`${venue ?? 'Hotel & Convention'}`}<br />
+                                                {`${venueAddress ?? 'Jl. Hotel, Jakarta 12420'}`}<br />
                                                 Ballroom 1
                                             </p>
                                         </div>
@@ -556,13 +556,36 @@
         }
 
         function HomePage() {
+            const { bride, brideDescription, brideFull } = {
+                bride: 'Maya',
+                brideDescription: 'Putri ke-1 dari Bapak H. Kaka & Ibu Hj. Elya',
+                brideFull: 'Mayasari Ningsih, S.Si',
+            };
+            const { groom, groomDescription, groomFull } = {
+                groom: 'Abdul',
+                groomDescription: 'Putra ke-2 dari Bapak Elmy & Ibu Kokom',
+                groomFull: 'Ahmad Abdul, S.T.',
+            };
+            const { marriageDate, venue, venueAddress } = {
+                marriageDate: 'Minggu, 5 Apr 2025',
+                venue: 'Harris Hotel & Convention',
+                venueAddress: 'Jalan Gatot Subroto Kav. 4 No. 1123 DKI Jakarta 10250'
+            };
+            const recepient = 'Kel. H. Eep Sumenep';
             return (
               <div>
-                <EnvelopeSection />
-                <CoverSection />
+                <EnvelopeSection bride={bride} groom={groom} marriageDate={marriageDate} recepient={recepient} />
+                <CoverSection bride={bride} groom={groom} marriageDate={marriageDate} />
                 <PreambleSection />
-                <BrideGroomSection />
-                <EventSection />
+                <BrideGroomSection
+                    bride={bride}
+                    brideDescription={brideDescription}
+                    brideFull={brideFull}
+                    groom={groom}
+                    groomDescription={groomDescription}
+                    groomFull={groomFull}
+                />
+                <EventSection marriageDate={marriageDate} venue={venue} venueAddress={venueAddress} />
                 <LocationSection />
                 <LiveStreamingSection />
                 <CautionSection />
