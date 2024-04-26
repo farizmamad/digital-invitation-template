@@ -25,6 +25,12 @@
     <script type="text/jsx">
         const app = document.getElementById('app');
 
+        function SectionTitle({ text }) {
+            return (
+                <h2 className="text-center typography-7 text-medium-large color-primary reveal margin-bottom-3">{text ?? 'Section Title'} </h2>
+            );
+        }
+
         function EnvelopeSection({ brideName, groomName, marriageDate, recepient }) {
             return(
                 <section className="container-fluid envelope">
@@ -162,7 +168,7 @@
                     <div className="d-flex vh-100 align-items-center justify-content-center">
                         <div className="w-100 h-80">
                             <div className="row justify-content-center">
-                                <h2 className="text-center typography-7 text-medium-large color-primary reveal margin-bottom-3">Rangkaian Acara</h2>
+                                <SectionTitle text='Rangkaian Acara' />
                                 <div className="col-10 col-md-6 border border-4 border-white reveal bg-color-secondary rounded-box">
                                     <div className="row justify-content-center reveal">
                                         <div className="col-12 col-md-8">
@@ -231,7 +237,7 @@
                 <section className="container-fluid location">
                     <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
                         <div className="row justify-content-center reveal">
-                            <h2 className="text-center text-medium-large typography-7 color-primary">Acara akan dimulai dalam</h2>
+                            <SectionTitle text='Acara akan dimulai dalam' />
                             <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">
                                 <div className="container-day">
                                     <h4 className="day-2 typography-6 color-primary">00</h4>
@@ -260,7 +266,7 @@
                         <div className="margin-top-5"></div>
                         <div className="row justify-content-center">
                             <div className="col-12 col-md-12 justify-content-center reveal">
-                                <h2 className="text-center typography-7 text-medium-large color-primary margin-bottom-3">Peta Lokasi</h2>
+                                <SectionTitle text='Peta Lokasi' />
                                 <p className="text-center typography-6 text-dark">
                                     {`${venueName ?? 'Hotel & Convention'}`}<br />
                                     {`${venueAddress ?? 'Jl. Hotel, Jakarta 12420'}`}<br />
@@ -289,7 +295,7 @@
                     <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
                         <div className="row justify-content-center reveal">
                             <div className="col-11 col-md-5">
-                                <h2 className="text-center typography-7 text-medium-large color-primary margin-bottom-3">Live Streaming</h2>
+                                <SectionTitle text='Live Streaming' />
                                 <p className="text-center typography-6 text-dark">
                                     Bagi anda yang tidak dapat menghadiri acara, kami mohon berkenan untuk dapat memberikan do'a dan restu kepada kedua mempelai 
                                     dengan menyaksikan serangkaian acara pernikahan putra-putri kami yang disiarkan secara langsung dan dapat diakses melalui link
@@ -317,7 +323,7 @@
                         <div className="h-80">
                             <div className="row justify-content-center reveal">
                                 <div className="col-10 col-md-6">
-                                    <h2 className="text-center typography-7 color-primary margin-bottom-3">Health Protocols</h2>
+                                    <SectionTitle text='Health Protocols' />
                                     <p className="text-center typography-6 text-dark">Guna mencegah penyebaran COVID-19, diharapkan bagi tamu undangan untuk mematuhi protokol kesehatan berikut ini:</p>
                                     <img src="./images/prokes.png" className="img-fluid" alt="..." />
                                 </div>
@@ -334,7 +340,7 @@
                     <div className="d-flex flex-column align-items-center justify-content-center">
                         <div className="col-10 col-md-12 border border-4 border-white reveal bg-light rounded-box margin-top-2 margin-bottom-3">
                             <div className="row justify-content-center">
-                                <h2 className="text-center typography-7 text-medium-large color-primary">Our Gallery</h2>
+                                <SectionTitle text='Our Gallery' />
                             </div>
                             <table>
                                 <tbody>
@@ -363,7 +369,7 @@
                     <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
                         <div className="row justify-content-center">
                             <div className="col-12 col-md-12 rsvp-form">
-                                <h2 className="text-center typography-7 text-medium-large color-primary">RSVP & Ucapan</h2>
+                                <SectionTitle text='RSVP & Ucapan' />
                             </div>
                         </div>
                         <div className="row justify-content-center">
@@ -399,7 +405,7 @@
                     <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
                         <div className="row justify-content-center">
                             <div className="col-12 col-md-12">
-                                <h2 className="text-center typography-7 text-medium-large color-primary">Wedding Gift</h2>
+                                <SectionTitle text='Wedding Gift' />
                             </div>
                         </div>
                         <div className="row justify-content-center">
