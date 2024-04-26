@@ -335,6 +335,15 @@
         }
 
         function GallerySection({ imagesUrl }) {
+            const imagesColumn = imagesUrl.map(url => {
+                return (
+                    <td className="span1" key={url}>
+                        <div className="col-12 col-md-4">
+                            <img src="url" alt="..." />
+                        </div>
+                    </td>
+                );
+            });
             return (
                 <section className="container-fluid gallery">
                     <div className="d-flex flex-column align-items-center justify-content-center">
@@ -345,15 +354,7 @@
                             <table>
                                 <tbody>
                                     <tr className="row justify-content-center">
-                                        { imagesUrl.map(url => {
-                                            return (
-                                                <td className="span1" key={url}>
-                                                    <div className="col-12 col-md-4">
-                                                        <img src="url" alt="..." />
-                                                    </div>
-                                                </td>
-                                            );
-                                        }) }
+                                        { imagesColumn }
                                     </tr>
                                 </tbody>
                             </table>
