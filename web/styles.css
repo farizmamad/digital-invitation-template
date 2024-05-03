@@ -192,34 +192,34 @@
     }
 
     .envelope {
-        background-image: url("../images/mobile/1.jpg");
+        background-image: url("./images/mobile/1.jpg");
         background-position: center center;
         background-size:auto 100%;
         background-repeat: no-repeat;
     }
 
     .cover {
-        background-image: url("../images/mobile/gallery-1.jpg");
+        background-image: url("./images/mobile/gallery-1.jpg");
         background-position: center center;
         background-size:auto 100%;
         background-repeat: no-repeat;
     }
     
     .preamble {
-        background-image: url("../images/mobile/2.jpg");
+        background-image: url("./images/mobile/2.jpg");
         background-position: center center;
         background-size:100% 100%;
     } 
     
     .bride-groom {
-        background-image: url("../images/mobile/3.jpg");
+        background-image: url("./images/mobile/3.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
     
     .event,
     .event-virtual {
-        background-image: url("../images/mobile/4.jpg");
+        background-image: url("./images/mobile/4.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
@@ -227,7 +227,7 @@
     .countdown-page,
     .live-streaming,
     .gallery {
-        background-image: url("../images/mobile/6.jpg");
+        background-image: url("./images/mobile/6.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
@@ -235,25 +235,25 @@
     .location,
     .caution,
     .rsvp {
-        background-image: url("../images/mobile/5.jpg");
+        background-image: url("./images/mobile/5.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
     
     .gift  {
-        background-image: url("../images/mobile/12.jpg");
+        background-image: url("./images/mobile/12.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
     
     .invitation  {
-        background-image: url("../images/mobile/11.jpg");
+        background-image: url("./images/mobile/11.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
     
     .footer {
-        background-image: url("../images/mobile/8.jpg");
+        background-image: url("./images/mobile/8.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
@@ -297,33 +297,33 @@
     }
 
     .envelope {
-        background-image: url("../images/desktop/1.jpg");
+        background-image: url("./images/desktop/1.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
 
     .cover {
-        background-image: url("../images/desktop/gallery-1.jpg");
+        background-image: url("./images/desktop/gallery-1.jpg");
         background-position: center center;
         background-size:auto 100%;
         background-repeat: no-repeat;
     }
     
     .preamble {
-        background-image: url("../images/desktop/2.jpg");
+        background-image: url("./images/desktop/2.jpg");
         background-position: center center;
         background-size:100% 100%;
     } 
     
     .bride-groom {
-        background-image: url("../images/desktop/3.jpg");
+        background-image: url("./images/desktop/3.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
     
     .event,
     .event-virtual {
-        background-image: url("../images/desktop/4.jpg");
+        background-image: url("./images/desktop/4.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
@@ -331,7 +331,7 @@
     .countdown-page,
     .live-streaming,
     .gallery  {
-        background-image: url("../images/desktop/6.jpg");
+        background-image: url("./images/desktop/6.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
@@ -339,20 +339,20 @@
     .location,
     .caution,
     .rsvp  {
-        background-image: url("../images/desktop/5.jpg");
+        background-image: url("./images/desktop/5.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
     
     .invitation,
     .gift  {
-        background-image: url("../images/desktop/11.jpg");
+        background-image: url("./images/desktop/11.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
     
     .footer {
-        background-image: url("../images/desktop/8.jpg");
+        background-image: url("./images/desktop/8.jpg");
         background-position: center center;
         background-size:100% 100%;
     }
