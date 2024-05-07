@@ -131,11 +131,11 @@
                             <div className="row justify-content-center">
                                 <div className="col-4 col-md-2 text-center">
                                     <div className="row justify-content-start">
-                                        <img src="./images/bride.png" className="rounded img-person" alt="foto mempelai wanita" />  
+                                        <img src="./images/bride.jpg" className="rounded img-person" alt="foto mempelai wanita" />  
                                     </div>  
                                 </div>
                                 <div className="col-8 col-md-4 text-center">
-                                    <h4 className="text-start typography text-medium-large text-dark">{`${brideFullName ?? 'Marie'},  (${brideSurname ?? 'Marie'})`}</h4>
+                                    <h4 className="text-start typography-4 text-medium-large text-dark">{`${brideFullName ?? 'Marie'},  (${brideSurname ?? 'Marie'})`}</h4>
                                     <p className="text-start typography-4 text-medium color-primary">{`${brideDescription ?? 'Putri dari David & Julia'}`}</p>
                                 </div>
                             </div>
@@ -146,12 +146,12 @@
                             </div>
                             <div className="row justify-content-center">
                                 <div className="col-8 col-md-4 text-center">
-                                    <h4 className="text-end typography text-medium-large text-dark">{`${groomFullName ?? 'John'},  (${groomSurname ?? 'John'})`}</h4>
+                                    <h4 className="text-end typography-4 text-medium-large text-dark">{`${groomFullName ?? 'John'},  (${groomSurname ?? 'John'})`}</h4>
                                     <p className="text-end typography-4 text-medium color-primary">{`${groomDescription ?? 'Putra ke-2 dari Pablo & Anne'}`}</p>
                                 </div>
                                 <div className="col-4 col-md-2 text-center">
                                     <div className="row justify-content-end">
-                                        <img src="./images/groom.png" className="rounded img-person" alt="foto mempelai pria" />
+                                        <img src="./images/groom.jpg" className="rounded img-person" alt="foto mempelai pria" />
                                     </div>
                                 </div>
                             </div>
@@ -593,6 +593,10 @@
             const [congratulations] = React.useState([
                 { id: 1, formName: "Bobby", formCongratulations: "Have a happy wedding" },
                 { id: 2, formName: "Alice", formCongratulations: "Semoga apa yang kalian cita-citakan dalam pernikahan bisa tercapai." },
+                { id: 3, formName: "Bapak Ir. Sodarmo", formCongratulations: "Saya mengucapkan selamat atas pernikahan ananda dan adinda. Semoga selalu dalam keberkahan dan kebahagiaan." },
+                { id: 4, formName: "Ibu Hj. Arin Suarin", formCongratulations: "Barakallahulakuma wa barakah 'alaikuma." },
+                { id: 5, formName: "Raim Laos", formCongratulations: "Terima kasih atas undangannya. Semoga lancar segala urusan hingga hari H." },
+                { id: 6, formName: "Menteri Sosial", formCongratulations: "Semoga berbahagia dalam ikatan cinta pernikahan." },
             ]);
 
             function onClickPlayAudioButton() {
