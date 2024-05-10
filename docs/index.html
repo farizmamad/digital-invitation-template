@@ -401,8 +401,51 @@
             );
         }
 
-        function RsvpSection({ congratulations }) {
-            const congratulationsList = insertCongratulation(congratulations);
+        function RsvpSection({ congratulationList, setCongratulationList, recepient }) {
+            const congratulationListInsert = insertCongratulation(congratulationList);
+            const [name, setName] = React.useState(recepient);
+            const [presence, setPresence] = React.useState('present');
+            const [paxCount, setPaxCount] = React.useState(1);
+            const [congratulation, setCongratulation] = React.useState('Selamat berbahagia.');
+
+            function onRadioChange(e) {
+                setPresence(e.target.value);
+            }
+
+            function onPaxCountChange(e) {
+                if (e.target.value > 0) {
+                    setPaxCount(e.target.value);
+                } else {
+                    setPaxCount(0);
+                }
+            }
+
+            function onCongratulationChange(e) {
+                setCongratulation(e.target.value ?? '');
+            }
+
+            function onClickSubmitCongratulation() {
+                console.log(name, congratulation)
+                if (!name || !congratulation) {
+                    return;
+                }
+                
+                let lastId = 1;
+                for(const congrat of congratulationList) {
+                    if (congrat?.id && lastId < congrat.id) {
+                        lastId = congrat.id;
+                    }
+                }
+                
+                setCongratulationList([{
+                    id: lastId + 1,
+                    formName: name,
+                    formCongratulationList: congratulation,
+                }].concat(congratulationList));
+
+                setName('');
+                setCongratulation('');
+            }
 
             return (
                 <section className="container-fluid rsvp">
@@ -417,23 +460,23 @@
                                 <form action="#" method="POST" autoComplete="off">
                                     <input type="hidden" name="_csrf" defaultValue="" />
                                     <label htmlFor="formName">Nama:</label><br />
-                                    <input type="text" id="formName" name="formName" defaultValue="" /><br />
+                                    <input type="text" id="formName" name="formName" defaultValue={name ?? ""} /><br />
                                     <div className="rsvp-form">
-                                        <input type="radio" id="present" name="formPresence" defaultValue="present" />
+                                        <input type="radio" id="present" name="formPresence" defaultValue="present" defaultChecked={presence === 'present' ? true : false} onChange={onRadioChange}/>
                                         <label htmlFor="present">Ya, Saya hadir</label><br />
-                                        <input type="radio" id="absent" name="formPresence" defaultValue="absent" />
+                                        <input type="radio" id="absent" name="formPresence" defaultValue="absent" defaultChecked={presence === 'absent' ? true : false} onChange={onRadioChange}/>
                                         <label htmlFor="absent">Maaf, Saya tidak hadir</label><br />
                                     </div>
                                     <label htmlFor="formTotalAudience">Jumlah yang hadir:</label><br />
-                                    <input type="text/number" id="formTotalAudience" name="formTotalAudience" defaultValue="" /><br />
-                                    <label htmlFor="formCongratulations">Ucapan:</label><br />
-                                    <textarea id="formCongratulations" name="formCongratulations" rows="4" cols="20"></textarea><br />
-                                    <button id="formSubmit" type="button" className="btn btn-success">Kirim</button>
+                                    <input type="text/number" id="formTotalAudience" name="formTotalAudience" defaultValue={paxCount} onChange={onPaxCountChange}/><br />
+                                    <label htmlFor="formCongratulationList">Ucapan:</label><br />
+                                    <textarea id="formCongratulationList" name="formCongratulationList" rows="4" cols="20" onChange={onCongratulationChange} defaultValue={congratulation}></textarea><br />
+                                    <button id="formSubmit" type="button" className="btn btn-success" onClick={onClickSubmitCongratulation}>Kirim</button>
                                 </form>
                             </div>
                         </div>
-                        <div className="row justify-content-center" id="congratulationsList">
-                            { congratulationsList }
+                        <div className="row justify-content-center" id="congratulationList">
+                            { congratulationListInsert }
                         </div>
                     </div>
                 </section>
@@ -605,11 +648,11 @@
             );
         }
 
-        function insertCongratulation(congratulations) {
-            return congratulations.map(c => 
+        function insertCongratulation(congratulationList) {
+            return congratulationList.map(c => 
                 <div key={c.id} className="col-11 col-md-8 bg-color-secondary border border-3 border-white rounded">
                     <p className="typography-2 color-primary">{c.formName}</p>
-                    <p className="typography-6 color-primary">{c.formCongratulations}</p>
+                    <p className="typography-6 color-primary">{c.formCongratulationList}</p>
                 </div>
             );
         }
@@ -621,13 +664,13 @@
             const [showAudioButton, setShowAudioButton] = React.useState(false);
             const [showPlayAudioButton, setShowPlayAudioButton] = React.useState(true);
             const [showPauseAudioButton, setShowPauseAudioButton] = React.useState(false);
-            const [congratulations] = React.useState([
-                { id: 1, formName: "Bobby", formCongratulations: "Have a happy wedding" },
-                { id: 2, formName: "Alice", formCongratulations: "Semoga apa yang kalian cita-citakan dalam pernikahan bisa tercapai." },
-                { id: 3, formName: "Bapak Ir. Sodarmo", formCongratulations: "Saya mengucapkan selamat atas pernikahan ananda dan adinda. Semoga selalu dalam keberkahan dan kebahagiaan." },
-                { id: 4, formName: "Ibu Hj. Arin Suarin", formCongratulations: "Barakallahulakuma wa barakah 'alaikuma." },
-                { id: 5, formName: "Raim Laos", formCongratulations: "Terima kasih atas undangannya. Semoga lancar segala urusan hingga hari H." },
-                { id: 6, formName: "Menteri Sosial", formCongratulations: "Semoga berbahagia dalam ikatan cinta pernikahan." },
+            const [congratulationList, setCongratulationList] = React.useState([
+                { id: 1, formName: "Bobby", formCongratulationList: "Have a happy wedding" },
+                { id: 2, formName: "Alice", formCongratulationList: "Semoga apa yang kalian cita-citakan dalam pernikahan bisa tercapai." },
+                { id: 3, formName: "Bapak Ir. Sodarmo", formCongratulationList: "Saya mengucapkan selamat atas pernikahan ananda dan adinda. Semoga selalu dalam keberkahan dan kebahagiaan." },
+                { id: 4, formName: "Ibu Hj. Arin Suarin", formCongratulationList: "Barakallahulakuma wa barakah 'alaikuma." },
+                { id: 5, formName: "Raim Laos", formCongratulationList: "Terima kasih atas undangannya. Semoga lancar segala urusan hingga hari H." },
+                { id: 6, formName: "Menteri Sosial", formCongratulationList: "Semoga berbahagia dalam ikatan cinta pernikahan." },
             ]);
             const [showGiftModal, setShowGiftModal] = React.useState(false);
 
@@ -693,7 +736,7 @@
                 <LiveStreamingSection />
                 <CautionSection />
                 <GallerySection imagesUrl={imagesUrl} />
-                <RsvpSection congratulations={congratulations}/>
+                <RsvpSection congratulationList={congratulationList} setCongratulationList={setCongratulationList} recepient={recepient}/>
                 <GiftSection showGiftModal={showGiftModal} onClick={onClickGiftButton} />
                 <InvitationSection />
                 audio
