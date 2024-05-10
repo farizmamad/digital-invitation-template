@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width,
+                initial-scale=1,
+                shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta 
+        http-equiv="Content-Security-Policy" 
+        content="style-src-elem https://fonts.googleapis.com https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css 'self';"
+    >
+    <title>The Wedding of John & Marie</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/jsx">
+        const app = document.getElementById('app');
+
+        function SectionTitle({ text }) {
+            return (
+                <h2 className="text-center typography-7 text-medium-large color-primary margin-bottom-3">{text ?? 'Section Title'} </h2>
+            );
+        }
+
+        function EnvelopeSection({ brideName, groomName, marriageDate, recepient, audioButton, playAudioButton }) {
+            function openInvitation() {
+                let pageHeight = window.innerHeight;
+                window.scrollBy(0, pageHeight);
+                audioButton.setShowAudioButton = 
+                playAudioButton.setShowPlayAudioButton = false;
+            }
+
+            return(
+                <section className="container-fluid envelope">
+                    <div className="d-flex vh-100 align-items-center"> 
+                        <div className="col-12">
+                            <div className="row justify-content-center">
+                                <div className="d-flex flex-column vh-50 justify-content-center margin-bottom-1">
+                                    <p className="text-center text-medium-large typography-2 color-primary">Wedding Invitation</p>
+                                    <h1 className="text-center text-large typography color-primary">{`${brideName ?? 'Marie'} & ${groomName ?? 'John'}`}</h1>
+                                    <p className="text-center text-medium-large typography-3 color-primary">{`${marriageDate ?? 'Saturday, 5 Jan 2025'}`}</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-10 col-md-5 justify-content-center border rounded bg-color-secondary">
+                                    <p className="text-center text-medium color-primary">Kepada Yth.</p>
+                                    <h4 className="text-center color-primary guest-name">{recepient ?? 'Tamu Undangan'}</h4>
+                                    <p className="text-center text-small color-primary">Mohon maaf apabila ada kesalahan penulisan nama dan/atau gelar</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="d-grid gap-2 col-8 col-md-4 mx-auto" onClick={playAudioButton.onClick}>
+                                    <button id="openInvitationButton" className="btn btn-success margin-top-5" onClick={openInvitation}>Buka undangan<br /> atau scroll ke bawah</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function CoverSection({ brideName, groomName, marriageDate }) {
+            return(
+                <section className="container-fluid cover">
+                    <div className="d-flex vh-100">
+                        <div className="col-12">
+                            <div className="row align-items-start">
+                                <div className="d-flex flex-column vh-50 justify-content-center margin-bottom-1">
+                                    <p className="text-center text-medium-large typography-2 shadow-black text-light fade-in-text-fast">Wedding Invitation</p>
+                                    <h1 className="text-center text-large typography shadow-gray text-light fade-in-text-medium">{`${brideName ?? 'Marie'} & ${groomName ?? 'John'}`}</h1>
+                                    <p className="text-center text-medium-large typography-3 shadow-black text-light fade-in-text-slow">{`${marriageDate ?? 'Saturday, 5 Jan 2025'}`}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function PreambleSection() {
+            return (
+                <section className="container-fluid preamble">
+                    <div className="d-flex vh-100 align-items-center justify-content-center">
+                        <div className="col-12">
+                            <div className="row justify-content-center">
+                                <div className="col-10 col-md-6">
+                                    <p className="text-center typography-5 text-medium-large color-primary">Bismillahirrahmaanirrahiim</p>
+                                    <p className="text-center typography-6 color-primary">
+                                        Maha Suci Allah yang telah menciptakan
+                                        makhluknya berpasang-pasangan
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-10 col-md-6 border border-4 border-white bg-color-secondary">
+                                    <p className="text-center typography-2 color-primary">
+                                        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir."
+                                    </p>
+                                    <p className="text-center typography-2 color-primary">Q.S. Ar-Rum:21</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function BrideGroomSection({ bride, groom }) {
+            const { brideSurname, brideDescription, brideFullName } = bride;
+            const { groomSurname, groomDescription, groomFullName } = groom;
+            return (
+                <section className="container-fluid bride-groom">
+                    <div className="d-flex vh-100 align-items-center justify-content-center">
+                        <div className="w-100 h-80">
+                            <div className="row justify-content-center">
+                                <div className="col-10">
+                                    <p className="text-center typography-6 text-dark">
+                                        Ya Allah, kami memohon Ridho-Mu untuk pernikahan putra-putri kami :
+                                    </p>    
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-4 col-md-2 text-center">
+                                    <div className="row justify-content-start">
+                                        <img src="./images/bride.jpg" className="rounded img-person" alt="foto mempelai wanita" />  
+                                    </div>  
+                                </div>
+                                <div className="col-8 col-md-4 text-center">
+                                    <h4 className="text-start typography-4 text-medium-large text-dark">{`${brideFullName ?? 'Marie'},  (${brideSurname ?? 'Marie'})`}</h4>
+                                    <p className="text-start typography-4 text-medium color-primary">{`${brideDescription ?? 'Putri dari David & Julia'}`}</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-12 col-md-1">
+                                    <p className="text-center typography text-medium-large text-dark">&</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-8 col-md-4 text-center">
+                                    <h4 className="text-end typography-4 text-medium-large text-dark">{`${groomFullName ?? 'John'},  (${groomSurname ?? 'John'})`}</h4>
+                                    <p className="text-end typography-4 text-medium color-primary">{`${groomDescription ?? 'Putra ke-2 dari Pablo & Anne'}`}</p>
+                                </div>
+                                <div className="col-4 col-md-2 text-center">
+                                    <div className="row justify-content-end">
+                                        <img src="./images/groom.jpg" className="rounded img-person" alt="foto mempelai pria" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-10">
+                                    <p className="text-center typography-6 text-dark">
+                                        untuk mengikuti sunnah Rasul-Mu dalam membentuk
+                                        keluarga yang sakinah, mawaddah, warahmah
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function EventSection({ marriageDate, venueName, venueAddress }) {
+            return (
+                <section className="container-fluid event">
+                    <div className="d-flex vh-100 align-items-center justify-content-center">
+                        <div className="w-100 h-80">
+                            <div className="row justify-content-center">
+                                <SectionTitle text='Rangkaian Acara' />
+                                <div className="col-10 col-md-6 border border-4 border-white bg-color-secondary rounded-box">
+                                    <div className="row justify-content-center">
+                                        <div className="col-12 col-md-8">
+                                            <p className="text-center typography-6 text-dark">
+                                                Acara diadakan pada :
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="row justify-content-center">
+                                        <div className="col-12 col-md-12">
+                                            <h4 className="text-center typography-2 text-medium-large color-primary">{`${marriageDate ?? 'Sabtu, 5 Jan 2025'}`}</h4>
+                                        </div>
+                                    </div>
+                                    <div className="row justify-content-center">
+                                        <div className="col-12 col-md-12">
+                                            <p className="text-center typography-6 text-dark">
+                                                di {`${venueName ?? 'Hotel & Convention'}`}<br />
+                                                {`${venueAddress ?? 'Jl. Hotel, Jakarta 12420'}`}<br />
+                                                Ballroom 1
+                                            </p>
+                                        </div>
+                                    </div>                 
+                                    <div className="row justify-content-center">
+                                        <div className="col-10 col-md-6" id="akadNikah">
+                                            <h4 className="text-center typography-2 text-medium-large color-primary">Akad Nikah</h4>
+                                            <p className="text-center typography-6 text-dark">
+                                                pukul 08:00 - 10:00 WIB<br />
+                                            </p>
+                                        </div>
+                                        <div className="col-10 col-md-6" id="resepsi">
+                                            <h4 className="text-center typography-2 text-medium-large color-primary">Resepsi</h4>
+                                            <p className="text-center typography-6 text-dark">
+                                                pukul 11:00 - 13:00 WIB<br />
+                                            </p>
+                                        </div>
+                                        <div className="col-10 col-md-6" id="resepsiSesi1">
+                                            <h4 className="text-center typography-2 text-medium-large color-primary">Resepsi</h4>
+                                            <p className="text-center typography-6 text-dark">
+                                                pukul 11:00 - 12:00 WIB<br />
+                                            </p>
+                                        </div>
+                                        <div className="col-10 col-md-6" id="resepsiSesi2">
+                                            <h4 className="text-center typography-2 text-medium-large color-primary">Resepsi</h4>
+                                            <p className="text-center typography-6 text-dark">
+                                                pukul 12:00 - 13:00 WIB<br />
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center margin-top-2">
+                                <div className="col-10 col-md-6">
+                                    <p className="text-center typography-6 text-dark">
+                                        Mempertimbangkan Protokol Kesehatan, acara Akad Nikah hanya dapat dihadiri oleh undangan terbatas.
+                                    </p>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function LocationSection({ venueName, venueAddress, venueMapsUrl, marriageDate }) {
+            const [textDay, setTextDay] = React.useState('00');
+            const [textHour, setTextHour] = React.useState('00');
+            const [textMinute, setTextMinute] = React.useState('00');
+            const [textSecond, setTextSecond] = React.useState('00');
+
+            function countdown() {
+                // specify the date and time we are counting down to.
+                const countDate = new Date(marriageDate).getTime();
+                const now = new Date().getTime();
+            
+                // calculate remaining time
+                const remainingTime = countDate - now;
+            
+                // workout the time in days, hours, mins, seconds
+                const second = 1000;
+                const minute = second * 60;
+                const hour = minute * 60;
+                const day = hour * 24;
+            
+                setTextDay(`${Math.floor(remainingTime / day)}`);
+                setTextHour(`${Math.floor((remainingTime % day) / hour)}`);
+                setTextMinute(`${Math.floor((remainingTime % hour) / minute)}`);
+                setTextSecond(`${Math.floor((remainingTime % minute) / second)}`);
+            }
+
+            React.useEffect(() => {
+                const interval = setInterval(countdown, 500);
+                return () => clearInterval(interval);
+            }, [textDay, textHour,textMinute, textSecond]);
+
+            return (
+                <section className="container-fluid location">
+                    <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
+                        <div className="row justify-content-center">
+                            <SectionTitle text='Acara akan dimulai dalam' />
+                            <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">
+                                <div className="container-day">
+                                    <h4 className="day-2 typography-6 color-primary">{`${textDay ?? '00'}`}</h4>
+                                    <p className="typography-6 color-primary">hari</p>
+                                </div>
+                            </div>
+                            <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">
+                                <div className="container-hour">
+                                    <h4 className="hour-2 typography-6 color-primary">{`${textHour ?? '00'}`}</h4>
+                                    <p className="typography-6 color-primary">jam</p>
+                                </div>
+                            </div>
+                            <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">
+                                <div className="container-minute">
+                                    <h4 className="minute-2 typography-6 color-primary">{`${textMinute ?? '00'}`}</h4>
+                                    <p className="typography-6 color-primary">menit</p>
+                                </div>
+                            </div>
+                            <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">        
+                                <div className="container-second">
+                                    <h4 className="second-2 typography-6 color-primary">{`${textSecond ?? '00'}`}</h4>
+                                    <p className="typography-6 color-primary">detik</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="margin-top-5"></div>
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-12 justify-content-center">
+                                <SectionTitle text='Peta Lokasi' />
+                                <p className="text-center typography-6 text-dark">
+                                    {`${venueName ?? 'Hotel & Convention'}`}<br />
+                                    {`${venueAddress ?? 'Jl. Hotel, Jakarta 12420'}`}<br />
+                                    Ballroom 1<br />
+                                </p>
+                            </div>
+                        </div>
+                        <div className="row justify-content-center margin-top-5">
+                            <div className="col-12 align-items-center">
+                                <button id="openMaps" className="btn btn-success text-center" onClick={() => window.open(venueMapsUrl ?? 'https://goo.gl/maps/gY69sfQoqaogec8j8')}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-map" viewBox="0 0 16 16">
+                                        <path fillRule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
+                                    </svg>
+                                    Lihat Peta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function LiveStreamingSection({ liveStreamingUrl }) {
+            return (
+                <section className="container-fluid live-streaming">
+                    <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
+                        <div className="row justify-content-center">
+                            <div className="col-11 col-md-5">
+                                <SectionTitle text='Live Streaming' />
+                                <p className="text-center typography-6 text-dark">
+                                    Bagi anda yang tidak dapat menghadiri acara, kami mohon berkenan untuk dapat memberikan do'a dan restu kepada kedua mempelai 
+                                    dengan menyaksikan serangkaian acara pernikahan putra-putri kami yang disiarkan secara langsung dan dapat diakses melalui link
+                                    di bawah ini:
+                                </p>
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <button id="liveStreaming" className="btn btn-success text-center" onClick={() => location.href = liveStreamingUrl ?? 'https://bit.ly/live-streaming-link'}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-youtube" viewBox="0 0 16 16">
+                                    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                                </svg>
+                                Buka Live Streaming
+                            </button>
+                        </div> 
+                    </div>
+                </section>
+            );
+        }
+
+        function CautionSection() {
+            return (
+                <section className="container-fluid caution">
+                    <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
+                        <div className="h-80">
+                            <div className="row justify-content-center">
+                                <div className="col-10 col-md-6">
+                                    <SectionTitle text='Health Protocols' />
+                                    <p className="text-center typography-6 text-dark">Guna mencegah penyebaran COVID-19, diharapkan bagi tamu undangan untuk mematuhi protokol kesehatan berikut ini:</p>
+                                    <img src="./images/prokes.png" className="img-fluid" alt="..." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function GallerySection({ imagesUrl }) {
+            const imagesColumn = imagesUrl.map(url => {
+                return (
+                    <td className="span1" key={url}>
+                        <div className="col-12 col-md-4">
+                            <img src={url} width={200} height={200} alt="..." />
+                        </div>
+                    </td>
+                );
+            });
+            return (
+                <section className="container-fluid gallery">
+                    <div className="d-flex flex-column align-items-center justify-content-center">
+                        <div className="col-10 col-md-12 border border-4 border-white bg-light rounded-box margin-top-2 margin-bottom-3">
+                            <div className="row justify-content-center">
+                                <SectionTitle text='Our Gallery' />
+                            </div>
+                            <table>
+                                <tbody>
+                                    <tr className="row justify-content-center">
+                                        { imagesColumn }
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function RsvpSection({ congratulations }) {
+            const congratulationsList = insertCongratulation(congratulations);
+
+            return (
+                <section className="container-fluid rsvp">
+                    <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-12 rsvp-form">
+                                <SectionTitle text='RSVP & Ucapan' />
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div id="formContainer" className="col-11 col-md-11 margin-bottom-3">
+                                <form action="#" method="POST" autoComplete="off">
+                                    <input type="hidden" name="_csrf" defaultValue="" />
+                                    <label htmlFor="formName">Nama:</label><br />
+                                    <input type="text" id="formName" name="formName" defaultValue="" /><br />
+                                    <div className="rsvp-form">
+                                        <input type="radio" id="present" name="formPresence" defaultValue="present" />
+                                        <label htmlFor="present">Ya, Saya hadir</label><br />
+                                        <input type="radio" id="absent" name="formPresence" defaultValue="absent" />
+                                        <label htmlFor="absent">Maaf, Saya tidak hadir</label><br />
+                                    </div>
+                                    <label htmlFor="formTotalAudience">Jumlah yang hadir:</label><br />
+                                    <input type="text/number" id="formTotalAudience" name="formTotalAudience" defaultValue="" /><br />
+                                    <label htmlFor="formCongratulations">Ucapan:</label><br />
+                                    <textarea id="formCongratulations" name="formCongratulations" rows="4" cols="20"></textarea><br />
+                                    <button id="formSubmit" type="button" className="btn btn-success">Kirim</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div className="row justify-content-center" id="congratulationsList">
+                            { congratulationsList }
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function GiftSection({ showGiftModal, onClick }) {
+            return (
+                <section className="container-fluid gift">
+                    <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-12">
+                                <SectionTitle text='Wedding Gift' />
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-10 col-md-8">
+                                <p className="text-center typography-6 text-dark">
+                                    Apabila Bapak/Ibu/Saudara/i ingin mengirimkan hadiah kepada kami, silahkan ketuk tombol berikut.
+                                </p>
+
+                                <p className="text-center">
+                                    <button className="btn btn-success" id="modalBtn" onClick={onClick} >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gift-fill" viewBox="0 0 16 16">
+                                            <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z"/>
+                                        </svg>
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <GiftModal show={showGiftModal} onClickExit={onClick} />
+                </section>
+            );
+        }
+
+        function InvitationSection() {
+            return (
+                <section className="container-fluid invitation">
+                    <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
+                        <div className="h-80">
+                            <div className="row justify-content-center">
+                                <div className="col-10 col-md-6">
+                                    <p className="text-center typography-6 text-dark">
+                                        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak, Ibu, Saudara/i berkenan hadir dan memberi do'a restu kepada kedua mempelai. Atas kehadiran dan do'a restunya kami ucapkan terima kasih.
+                                    </p>
+                                    <p className="text-center typography-5 text-dark">Wassalamu'alaikum Warahmatullaahi Wabarakaatuh</p>
+                                </div>
+                            </div>
+                            <p className="text-center typography-6 color-primary">Kami yang berbahagia</p>
+                            <div className="row justify-content-center">
+                                <div className="col-6 col-md-4">
+                                    <p className="text-center typography-6 text-medium color-primary">Kel. David</p>
+                                    <p className="text-center typography-6 text-medium color-primary">Julia</p>
+                                </div>
+                                <div className="col-6 col-md-4">
+                                    <p className="text-center typography-6 text-medium color-primary">Kel. Pablo</p>
+                                    <p className="text-center typography-6 text-medium color-primary">Anne</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-12 col-md-8">
+                                    <p className="text-center text-large typography color-primary">Marie & John</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function FooterSection() {
+            return (
+                <section className="container-fluid footer">
+                    <div className="d-flex flex-column vh-100 align-items-center justify-content-center overflow-hidden">
+                    </div>
+                </section>
+            );
+        }
+
+        function Sound({ volume }) {
+            return new Audio("audio/audio.mpeg#t=15");
+        }
+
+        function PauseAudioButton({ show, onClick, audio }) {
+            React.useEffect(() => {
+                if (show) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            }, [show, audio]);
+            return (
+                <button id="pauseAudio" className="btn-floating" style={{ display: show ? 'block' : 'none' }} onClick={onClick}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pause" viewBox="0 0 16 16">
+                        <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                </button>
+            );
+        }
+
+        function PlayAudioButton({ show, onClick, audio }) {    
+            React.useEffect(() => {
+                if (show) {
+                    audio.pause();
+                } else {
+                    audio.play();
+                }
+            }, [show, audio]);
+
+            return (
+                <button id="playAudio" className="btn-floating" style={{ display: show ? 'block' : 'none' }} onClick={onClick}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-music-note" viewBox="0 0 16 16">
+                        <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                        <path fillRule="evenodd" d="M9 3v10H8V3h1z"/>
+                        <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"/>
+                    </svg>
+                </button>
+            );
+        }
+
+        function GiftModal({ show, onClickExit }) {
+            return (
+                <div id="giftModal" className="modal" style={{display: show ? 'block' : 'none'}}>
+                    <div className="modal-content">
+                        <span className="modal-close" onClick={onClickExit}>&times;</span>
+                        <div className="row justify-content-center">
+                            <div className="col-6 col-md-2">
+                                <img src="./images/logo_mandiri.png" className="img-fluid" alt="..." />
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-12">
+                                <p className="text-center">
+                                    <button id="copyToClip1" className="btn btn-success text-center margin-top-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-clipboard" viewBox="0 0 16 16">
+                                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                        </svg>
+                                        1234567890 <br />
+                                        a/n John
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                        <div className="margin-top-5"></div>
+                        <div className="row justify-content-center">
+                            <div className="col-6 col-md-2">
+                                <img src="./images/logo_bca.png" className="img-fluid" alt="..." />
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-12">
+                               <p className="text-center">
+                                <button id="copyToClip2" className="btn btn-success text-center margin-top-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-clipboard" viewBox="0 0 16 16">
+                                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                    </svg>
+                                    1234567890 <br />
+                                    a/n Marie
+                                </button>
+                               </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            );
+        }
+
+        function insertCongratulation(congratulations) {
+            return congratulations.map(c => 
+                <div key={c.id} className="col-11 col-md-8 bg-color-secondary border border-3 border-white rounded">
+                    <p className="typography-2 color-primary">{c.formName}</p>
+                    <p className="typography-6 color-primary">{c.formCongratulations}</p>
+                </div>
+            );
+        }
+
+        function HomePage() {
+            const [playAudio, setPlayAudio] = React.useState(false);
+            const [audio] = React.useState(new Sound('./audio/audio.mpeg'));
+            const [audioVolume, setAudioVolume] = React.useState(0.3);
+            const [showAudioButton, setShowAudioButton] = React.useState(false);
+            const [showPlayAudioButton, setShowPlayAudioButton] = React.useState(true);
+            const [showPauseAudioButton, setShowPauseAudioButton] = React.useState(false);
+            const [congratulations] = React.useState([
+                { id: 1, formName: "Bobby", formCongratulations: "Have a happy wedding" },
+                { id: 2, formName: "Alice", formCongratulations: "Semoga apa yang kalian cita-citakan dalam pernikahan bisa tercapai." },
+                { id: 3, formName: "Bapak Ir. Sodarmo", formCongratulations: "Saya mengucapkan selamat atas pernikahan ananda dan adinda. Semoga selalu dalam keberkahan dan kebahagiaan." },
+                { id: 4, formName: "Ibu Hj. Arin Suarin", formCongratulations: "Barakallahulakuma wa barakah 'alaikuma." },
+                { id: 5, formName: "Raim Laos", formCongratulations: "Terima kasih atas undangannya. Semoga lancar segala urusan hingga hari H." },
+                { id: 6, formName: "Menteri Sosial", formCongratulations: "Semoga berbahagia dalam ikatan cinta pernikahan." },
+            ]);
+            const [showGiftModal, setShowGiftModal] = React.useState(false);
+
+            function onClickPlayAudioButton() {
+                setShowAudioButton(false);
+                setShowPlayAudioButton(false);
+                setShowPauseAudioButton(true);
+                setPlayAudio(true);
+            }
+
+            function onClickPauseAudioButton() {
+                setShowAudioButton(true);
+                setShowPlayAudioButton(true);
+                setShowPauseAudioButton(false);
+                setPlayAudio(false);
+            }
+
+            function onClickGiftButton() {
+                if (showGiftModal) setShowGiftModal(false);
+                else setShowGiftModal(true);
+            }
+
+            const { brideSurname, brideDescription, brideFullName } = {
+                brideSurname: 'Maya',
+                brideDescription: 'Putri ke-1 dari Bapak H. Kaka & Ibu Hj. Elya',
+                brideFullName: 'Mayasari Ningsih, S.Si',
+            };
+            const { groomSurname, groomDescription, groomFullName } = {
+                groomSurname: 'Abdul',
+                groomDescription: 'Putra ke-2 dari Bapak Elmy & Ibu Kokom',
+                groomFullName: 'Ahmad Abdul, S.T.',
+            };
+            const { marriageDate, venueName, venueAddress } = {
+                marriageDate: 'Minggu, 12 Jul 2045',
+                venueName: 'Harris Hotel & Convention',
+                venueAddress: 'Jalan Gatot Subroto Kav. 4 No. 1123 DKI Jakarta 10250'
+            };
+            const recepient = 'Kel. H. Eep Sumenep';
+            const imagesUrl = [
+                "./images/gallery-8.jpg",
+                "./images/gallery-12.jpg",
+                "./images/gallery-9.jpg",
+                "./images/gallery-11.jpg",
+            ];
+            return (
+              <div>
+                <EnvelopeSection
+                    brideName={brideSurname}
+                    groomName={groomSurname}
+                    marriageDate={marriageDate}
+                    recepient={recepient}
+                    audioButton={{ showAudioButton, setShowAudioButton }}
+                    playAudioButton={{ showPlayAudioButton, setShowPlayAudioButton, onClick: onClickPlayAudioButton }}
+                />
+                <CoverSection brideName={brideSurname} groomName={groomSurname} marriageDate={marriageDate} />
+                <PreambleSection />
+                <BrideGroomSection
+                    bride={{ brideSurname, brideDescription, brideFullName }}
+                    groom={{ groomSurname, groomDescription, groomFullName }}
+                />
+                <EventSection marriageDate={marriageDate} venue={venueName} venueAddress={venueAddress} />
+                <LocationSection venueName={venueName} venueAddress={venueAddress} marriageDate={marriageDate} />
+                <LiveStreamingSection />
+                <CautionSection />
+                <GallerySection imagesUrl={imagesUrl} />
+                <RsvpSection congratulations={congratulations}/>
+                <GiftSection showGiftModal={showGiftModal} onClick={onClickGiftButton} />
+                <InvitationSection />
+                audio
+                <PauseAudioButton show={showPauseAudioButton} onClick={onClickPauseAudioButton} audio={audio}/>
+                <PlayAudioButton show={showPlayAudioButton} onClick={onClickPlayAudioButton} audio={audio}/>
+              </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(app);
+        root.render(<HomePage />);
+    </script>
+</body>
+</html>
