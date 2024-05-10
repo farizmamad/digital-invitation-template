@@ -239,7 +239,37 @@
             );
         }
 
-        function LocationSection({ venueName, venueAddress, venueMapsUrl }) {
+        function LocationSection({ venueName, venueAddress, venueMapsUrl, marriageDate }) {
+            const [textDay, setTextDay] = React.useState('00');
+            const [textHour, setTextHour] = React.useState('00');
+            const [textMinute, setTextMinute] = React.useState('00');
+            const [textSecond, setTextSecond] = React.useState('00');
+
+            function countdown() {
+                // specify the date and time we are counting down to.
+                const countDate = new Date(marriageDate).getTime();
+                const now = new Date().getTime();
+            
+                // calculate remaining time
+                const remainingTime = countDate - now;
+            
+                // workout the time in days, hours, mins, seconds
+                const second = 1000;
+                const minute = second * 60;
+                const hour = minute * 60;
+                const day = hour * 24;
+            
+                setTextDay(`${Math.floor(remainingTime / day)}`);
+                setTextHour(`${Math.floor((remainingTime % day) / hour)}`);
+                setTextMinute(`${Math.floor((remainingTime % hour) / minute)}`);
+                setTextSecond(`${Math.floor((remainingTime % minute) / second)}`);
+            }
+
+            React.useEffect(() => {
+                const interval = setInterval(countdown, 500);
+                return () => clearInterval(interval);
+            }, [textDay, textHour,textMinute, textSecond]);
+
             return (
                 <section className="container-fluid location">
                     <div className="d-flex flex-column vh-100 align-items-center justify-content-center">
@@ -247,25 +277,25 @@
                             <SectionTitle text='Acara akan dimulai dalam' />
                             <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">
                                 <div className="container-day">
-                                    <h4 className="day-2 typography-6 color-primary">00</h4>
+                                    <h4 className="day-2 typography-6 color-primary">{`${textDay ?? '00'}`}</h4>
                                     <p className="typography-6 color-primary">hari</p>
                                 </div>
                             </div>
                             <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">
                                 <div className="container-hour">
-                                    <h4 className="hour-2 typography-6 color-primary">00</h4>
+                                    <h4 className="hour-2 typography-6 color-primary">{`${textHour ?? '00'}`}</h4>
                                     <p className="typography-6 color-primary">jam</p>
                                 </div>
                             </div>
                             <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">
                                 <div className="container-minute">
-                                    <h4 className="minute-2 typography-6 color-primary">00</h4>
+                                    <h4 className="minute-2 typography-6 color-primary">{`${textMinute ?? '00'}`}</h4>
                                     <p className="typography-6 color-primary">menit</p>
                                 </div>
                             </div>
                             <div className="col-2 col-md-1 countdown border border-3 border-white rounded bg-color-secondary rounded-box">        
                                 <div className="container-second">
-                                    <h4 className="second-2 typography-6 color-primary">00</h4>
+                                    <h4 className="second-2 typography-6 color-primary">{`${textSecond ?? '00'}`}</h4>
                                     <p className="typography-6 color-primary">detik</p>
                                 </div>
                             </div>
@@ -659,7 +689,7 @@
                     groom={{ groomSurname, groomDescription, groomFullName }}
                 />
                 <EventSection marriageDate={marriageDate} venue={venueName} venueAddress={venueAddress} />
-                <LocationSection venueName={venueName} venueAddress={venueAddress} />
+                <LocationSection venueName={venueName} venueAddress={venueAddress} marriageDate={marriageDate} />
                 <LiveStreamingSection />
                 <CautionSection />
                 <GallerySection imagesUrl={imagesUrl} />
