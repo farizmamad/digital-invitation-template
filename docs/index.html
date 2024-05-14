@@ -424,8 +424,11 @@
                 setCongratulation(e.target.value ?? '');
             }
 
+            function onNameChange(e) {
+                setName(e.target.value ?? '');
+            }
+
             function onClickSubmitCongratulation() {
-                console.log(name, congratulation)
                 if (!name || !congratulation) {
                     return;
                 }
@@ -442,10 +445,7 @@
                     formName: name,
                     formCongratulationList: congratulation,
                 }].concat(congratulationList));
-
-                setName('');
-                setCongratulation('');
-            }
+            }          
 
             return (
                 <section className="container-fluid rsvp">
@@ -460,7 +460,7 @@
                                 <form action="#" method="POST" autoComplete="off">
                                     <input type="hidden" name="_csrf" defaultValue="" />
                                     <label htmlFor="formName">Nama:</label><br />
-                                    <input type="text" id="formName" name="formName" defaultValue={name ?? ""} /><br />
+                                    <input type="text" id="formName" name="formName" onChange={onNameChange} defaultValue={name ?? ""}/><br />
                                     <div className="rsvp-form">
                                         <input type="radio" id="present" name="formPresence" defaultValue="present" defaultChecked={presence === 'present' ? true : false} onChange={onRadioChange}/>
                                         <label htmlFor="present">Ya, Saya hadir</label><br />
@@ -470,12 +470,12 @@
                                     <label htmlFor="formTotalAudience">Jumlah yang hadir:</label><br />
                                     <input type="text/number" id="formTotalAudience" name="formTotalAudience" defaultValue={paxCount} onChange={onPaxCountChange}/><br />
                                     <label htmlFor="formCongratulationList">Ucapan:</label><br />
-                                    <textarea id="formCongratulationList" name="formCongratulationList" rows="4" cols="20" onChange={onCongratulationChange} defaultValue={congratulation}></textarea><br />
+                                    <textarea id="formCongratulationList" name="formCongratulationList" rows="4" cols="20" onChange={onCongratulationChange} defaultValue={congratulation ?? ""}></textarea><br />
                                     <button id="formSubmit" type="button" className="btn btn-success" onClick={onClickSubmitCongratulation}>Kirim</button>
                                 </form>
                             </div>
                         </div>
-                        <div className="row justify-content-center" id="congratulationList">
+                        <div className="row justify-content-center" id="congratulationsList">
                             { congratulationListInsert }
                         </div>
                     </div>
@@ -671,6 +671,8 @@
                 { id: 4, formName: "Ibu Hj. Arin Suarin", formCongratulationList: "Barakallahulakuma wa barakah 'alaikuma." },
                 { id: 5, formName: "Raim Laos", formCongratulationList: "Terima kasih atas undangannya. Semoga lancar segala urusan hingga hari H." },
                 { id: 6, formName: "Menteri Sosial", formCongratulationList: "Semoga berbahagia dalam ikatan cinta pernikahan." },
+                { id: 7, formName: "Menteri Pariwisata", formCongratulationList: "Semoga berbahagia dalam ikatan cinta pernikahan." },
+                { id: 8, formName: "Menteri Pendidikan dan Kebudayaan", formCongratulationList: "Semoga berbahagia dalam ikatan cinta pernikahan." },
             ]);
             const [showGiftModal, setShowGiftModal] = React.useState(false);
 

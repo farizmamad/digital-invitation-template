@@ -376,8 +376,8 @@
 }
 
 #congratulationsList {
-    overflow:scroll;
-    max-height: 50%;
+    overflow-y:scroll;
+    height: 30%;
     -webkit-overflow-scrolling: touch;
 }
 
